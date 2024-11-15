@@ -1,2 +1,5 @@
-../Core/Src/ESPE_USART_0.c:21:6:inizializzo_USART	1
-../Core/Src/ESPE_USART_0.c:41:6:ESPE_USART_interrupt	12
+../Core/Src/ESPE_USART_0.c:32:6:inizializzo_USART	1
+../Core/Src/ESPE_USART_0.c:52:6:ESPE_USART_interrupt	12
+../Core/Src/ESPE_USART_0.c:117:6:create_vec	2
+../Core/Src/ESPE_USART_0.c:130:6:exponential	9
+../Core/Src/ESPE_USART_0.c:171:6:ESPE_USART_interrupt_send_vec	8

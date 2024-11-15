@@ -12,7 +12,7 @@ extern unsigned char stringa[];
 
 #define lunghezza_stringa sizeof(stringa) /sizeof(stringa[0])
 
-extern unsigned int indice;
+extern unsigned int count_pointer;
 // #endif /* INC_ESPE_SERIALE__H_ */
 
 //Ricordiamoci che tutto quanto definito nel .c qui va ripreso con extern

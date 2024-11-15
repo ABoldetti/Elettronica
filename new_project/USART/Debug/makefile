@@ -60,8 +60,8 @@ all: main-build
 main-build: USART.elf secondary-outputs
 
 # Tool invocations
-USART.elf USART.map: $(OBJS) $(USER_OBJS) /home/uboldee/coding/Elettronica/new_project/USART/STM32H743ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "USART.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/uboldee/coding/Elettronica/new_project/USART/STM32H743ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="USART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+USART.elf USART.map: $(OBJS) $(USER_OBJS) C:\Users\aderf\coding\Elettronica\new_project\USART\STM32H743ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "USART.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\aderf\coding\Elettronica\new_project\USART\STM32H743ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="USART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

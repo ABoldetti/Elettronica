@@ -22,7 +22,6 @@
 #include "usart.h"
 #include "usb_otg.h"
 #include "gpio.h"
-#include <stdbool.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -96,8 +95,6 @@ int main(void)
   inizializzo_USART();
 
   /* USER CODE END 2 */
-  /*char* string = "gatto\n";
-  int i = 0;
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -105,20 +102,10 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-	  /*if( *(string+i) != '\0'){
-		  USART3 ->TDR = *(string+i);
-		  i++;
-	  }
-	  else{
-		  i = 0;
-	  }
-	  while( !(bool)(USART3 -> ISR & USART_ISR_TXE_TXFNF)){}
-	  */
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
-
 
 /**
   * @brief System Clock Configuration

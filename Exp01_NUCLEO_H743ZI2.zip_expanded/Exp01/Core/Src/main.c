@@ -74,9 +74,9 @@ int main(void)
 //Abituiamoci ad inserire commenti
 	unsigned int cc=2000;
 	unsigned int attesa= 1;
-    unsigned int il_clock_impostato,  ripetizioni;
-    char led_acceso=1;
-    cc = 0xff;
+  unsigned int il_clock_impostato,  ripetizioni;
+  char led_acceso=1;
+  cc = 0xff;
 
 
 //Un indirizzo che possiamo usare per un attimo: 0x2407fff8

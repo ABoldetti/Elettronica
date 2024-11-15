@@ -1,0 +1,5 @@
+../Core/Src/my_ADC.c:33:6:ESPE_ADC_TIM6_setup	1
+../Core/Src/my_ADC.c:41:6:ESPE_ADC_init	4
+../Core/Src/my_ADC.c:101:6:ESPE_ADC_vec_read	2
+../Core/Src/my_ADC.c:112:9:ESPE_ADC_loop_vec_read	3
+../Core/Src/my_ADC.c:130:6:ESPE_ADC_temp_conversion	3

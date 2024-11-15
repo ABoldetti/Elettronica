@@ -10,7 +10,7 @@
 
 
 unsigned char stringa[]={"Buongiorno!\r"};
-unsigned int indice=0;
+unsigned int count_pointer=0;
 
 //Zona definizione variabili, vettori globali
 

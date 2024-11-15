@@ -22,11 +22,11 @@
 #include "usart.h"
 #include "usb_otg.h"
 #include "gpio.h"
-#include "ESPE_USART_0.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ESPE_USART_0.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,7 +94,7 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
   inizializzo_USART();
-
+  create_vec();
   /* USER CODE END 2 */
 
   /* Infinite loop */

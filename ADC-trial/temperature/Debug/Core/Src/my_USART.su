@@ -1,0 +1,5 @@
+../Core/Src/my_USART.c:22:6:ESPE_USART_init	16	static
+../Core/Src/my_USART.c:44:6:ESPE_USART_invert_mode	4	static
+../Core/Src/my_USART.c:56:9:ESPE_USART_char_start	8	static
+../Core/Src/my_USART.c:90:6:ESPE_USART_interrupt_send_vector	4	static
+../Core/Src/my_USART.c:112:6:ESPE_USART_transmit_loop_vec	16	static

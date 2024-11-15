@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Dude_My_Ass/Core/Inc/EPSE_my_USART.h&apos; to &apos;ESPE_my_USART.h&apos;" description="Rename resource &apos;EPSE_my_USART.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/EPSE_my_USART.h" name="ESPE_my_USART.h" stamp="1730886380990" updateReferences="true"/>
+</session>
