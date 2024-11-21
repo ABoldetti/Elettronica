@@ -13,7 +13,7 @@
 
 //key values
 #define A 1000
-#define data_len 600
+#define data_len 900
 #define Trigger_Value 1<<15
 #define Pretrigger_Value (1<<15)/4*3
 #define char_trigger 'e'

@@ -119,8 +119,8 @@ void ESPE_ADC_init(void){
 
 void ESPE_TIM6_init(void){
 	TIM6->CNT = 0;
-	TIM6->ARR = 10;
-	TIM6->PSC = 24;
+	TIM6->ARR = 5;
+	TIM6->PSC = 12;
 }
 
 
@@ -141,7 +141,6 @@ void ESPE_USART_char_start(void){
 		if ( USART3 -> RDR == char_trigger){
 			//flag_USART = 1;
 			flag_Trigger_EN = 1;
-			ESPE_USART_invert_mode();
 
 		}
 	}
@@ -204,8 +203,8 @@ void ESPE_DMA_Trigger_Pretrigger(void){
 				flag_Trigger_EN = 0;
 				flag_Pretriggered = 0;
 				index_stop = (DMA1_Stream0 ->NDTR + data_len)%A +1000;
-				return;
 			}
+			return;
 		}
 		if( ADC3 -> DR < Pretrigger_Value){
 			flag_Pretriggered = 1;
