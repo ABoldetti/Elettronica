@@ -12,10 +12,11 @@
 #include <stdint.h>
 
 //key values
-#define A 1000
-#define data_len 900
-#define Trigger_Value 1<<15
-#define Pretrigger_Value (1<<15)/4*3
+#define vec_len 10000
+#define data_len 9000
+#define skip_value 10
+#define Trigger_Value 30000
+#define Pretrigger_Value 20000
 #define char_trigger 'e'
 
 //renaming registers
@@ -34,6 +35,7 @@ void DMA_reset(void);
 void DMA_setup_USART(void);
 void ESPE_ADC_init(void);
 void ESPE_USART_init(void);
+void ESPE_COMP_init(void);
 void ESPE_TIM6_init(void);
 void ESPE_USART_char_start(void);
 void ESPE_DMA_switch_mode(void);
@@ -42,6 +44,7 @@ void ESPE_DMA_Trigger(void);
 void ESPE_DMA_Trigger_Pretrigger(void);
 void ESPE_DMA_data_manipulation(void);
 void ESPE_DMA_end_transmission(void);
-
+void ESPE_DMA_COMP_Trigger(void);
+void ESPE_DMA_COMP_Trigger_Pretrigger(void);
 
 #endif /* INC_ESPE_MY_DMA_H_ */

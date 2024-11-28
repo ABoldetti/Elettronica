@@ -14,13 +14,13 @@
 #include "tim.h"
 
 
-volatile uint16_t DMA_data[A];
-uint8_t flag_USART = 0;
-uint8_t flag_Pretriggered = 0;
-uint8_t flag_Triggered = 0;
-uint8_t flag_Trigger_EN = 0;
+volatile uint16_t DMA_data[vec_len];
+volatile uint8_t flag_USART = 0;
+volatile uint8_t flag_Pretriggered = 0;
+volatile uint8_t flag_Triggered = 0;
+volatile uint8_t flag_Trigger_EN = 0;
 
-uint16_t index_stop;
+uint16_t index_stop = vec_len + 1;
 uint16_t index_transmission = 0;
 unsigned char *pointer = (unsigned char *)(&index_stop);
 
@@ -30,8 +30,8 @@ unsigned char *pointer = (unsigned char *)(&index_stop);
 void DMA_setup_ADC(void){
 	DMA1_Stream0 ->M0AR = (uint32_t) &DMA_data;
 	DMA1_Stream0 ->PAR = (uint32_t) &(ADC3->DR);
-	DMA1_Stream0 ->NDTR = (uint16_t) A;
-	ADC3->CFGR |= ADC_CFGR_DMNGT;
+	DMA1_Stream0 ->NDTR = (uint16_t) vec_len;
+	//ADC3->CFGR |= ADC_CFGR_DMNGT;
 	DMA1_Stream0 ->CR |= DMA_SxCR_TCIE;
 }
 
@@ -46,7 +46,7 @@ void DMA_reset(void){
 void DMA_setup_USART(void){
 	DMA2_Stream0 ->M0AR = (uint32_t) &DMA_data;
 	DMA2_Stream0 ->PAR = (uint32_t) &(USART3->TDR);
-	DMA2_Stream0 ->NDTR = (uint16_t) A*2;
+	DMA2_Stream0 ->NDTR = (uint16_t) vec_len*2;
 	USART3->CR3 |= USART_CR3_DMAT;
 	DMA2_Stream0->CR |=DMA_SxCR_TCIE;
 }
@@ -109,6 +109,7 @@ void ESPE_ADC_init(void){
 	while( !(ADC3->ISR & ADC_ISR_ADRDY)){						//Aspettiamo che sia setuppato correttamente
 	}
 
+	ADC3 -> CFGR |=(3<<ADC_CFGR_DMNGT_Pos);
 
 	ADC3 -> IER |= ADC_IER_EOCIE;								//Attiviamo l'interrupt
 
@@ -119,9 +120,17 @@ void ESPE_ADC_init(void){
 
 void ESPE_TIM6_init(void){
 	TIM6->CNT = 0;
-	TIM6->ARR = 5;
-	TIM6->PSC = 12;
+	TIM6->ARR = 10;
+	TIM6->PSC = 24;
 }
+
+void ESPE_COMP_init(void){
+	COMP2->CFGR |= COMP_CFGRx_EN;
+	DAC1 -> CR |= DAC_CR_EN1;
+	DAC1 -> DHR12R1 = 1200;										// soglia di trigger
+	DAC1 -> SWTRIGR = DAC_SWTRIGR_SWTRIG1;
+}
+
 
 
 void ESPE_USART_invert_mode(void){
@@ -166,6 +175,7 @@ void ESPE_DMA_switch_mode(void){
 	if( flag_Triggered){
 		TIM6_stop;
 		DMA_reset();
+		ESPE_USART_invert_mode();
 		DMA_start_USART;
 		//flag_USART = 0;
 
@@ -179,8 +189,10 @@ void ESPE_DMA_switch_back(void){
 		ESPE_USART_invert_mode();
 		DMA_stop_USART;
 		DMA_reset();
-		DMA2_Stream0 -> NDTR = 2*A;
+		DMA2_Stream0 -> NDTR = 2*vec_len;
+		index_stop = vec_len + 1;
 		TIM6_start;
+
 	}
 }
 
@@ -202,7 +214,9 @@ void ESPE_DMA_Trigger_Pretrigger(void){
 				flag_Triggered = 1;
 				flag_Trigger_EN = 0;
 				flag_Pretriggered = 0;
-				index_stop = (DMA1_Stream0 ->NDTR + data_len)%A +1000;
+				//index_stop = (DMA1_Stream0 ->NDTR + vec_len - data_len)%vec_len;
+				index_stop = vec_len - (vec_len - DMA1_Stream0 -> NDTR + data_len +1)%vec_len;
+
 			}
 			return;
 		}
@@ -212,9 +226,41 @@ void ESPE_DMA_Trigger_Pretrigger(void){
 	}
 }
 
+void ESPE_DMA_COMP_Trigger(void){
+	if(!flag_Triggered && flag_Trigger_EN){
+			//TIM6_stop;
+			if( COMP12 -> SR & COMP_SR_C2VAL){
+				flag_Triggered = 1;
+				flag_Trigger_EN = 0;
+				index_stop = vec_len - (vec_len - DMA1_Stream0 -> NDTR + data_len +1)%vec_len;
+			}
+			//TIM6_start;
+		}
+}
+
+void ESPE_DMA_COMP_Trigger_Pretrigger(void){
+	if(!flag_Triggered && flag_Trigger_EN){
+		if( flag_Pretriggered){
+			if( COMP12 -> SR & COMP_SR_C2VAL){
+				flag_Triggered = 1;
+				flag_Trigger_EN = 0;
+				flag_Pretriggered = 0;
+				//index_stop = (DMA1_Stream0 ->NDTR + vec_len - data_len)%vec_len;
+				index_stop = vec_len - (vec_len - DMA1_Stream0 -> NDTR + data_len +1)%vec_len;
+
+			}
+			return;
+		}
+		if( !(COMP12-> SR & COMP_SR_C2VAL)){
+			flag_Pretriggered = 1;
+		}
+	}
+}
+
 
 void ESPE_DMA_data_manipulation(void){
-	if(DMA1_Stream0 ->NDTR == (index_stop-1000)){
+	if(flag_Triggered && DMA1_Stream0 ->NDTR == (index_stop)){
+		TIM6_stop;
 		ESPE_DMA_switch_mode();
 	}
 }

@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-sfrviewstate={"fFavorites"\:{"fLists"\:{"DMA1"\:["STM32H743/DMA1"],"DMA2"\:["STM32H743/DMA2"],"USART"\:["STM32H743/USART3"],"ADC"\:["STM32H743/ADC3"]}},"fProperties"\:{"fNodeProperties"\:{}}}
+sfrviewstate={"fFavorites"\:{"fLists"\:{"DMA1"\:["STM32H743/DMA1"],"DMA2"\:["STM32H743/DMA2"],"USART"\:["STM32H743/USART3"],"ADC"\:["STM32H743/ADC3"],"COMP"\:["STM32H743/COMP1"]}},"fProperties"\:{"fNodeProperties"\:{"STM32H743/COMP1/SR"\:{"fNodeProperties"\:{"autoupdate"\:"true"}}}}}

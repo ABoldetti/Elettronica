@@ -237,7 +237,6 @@ void USART3_IRQHandler(void)
 void DMA2_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream0_IRQn 0 */
-	ESPE_USART_invert_mode();
 	ESPE_DMA_end_transmission();
   /* USER CODE END DMA2_Stream0_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_usart3_tx);
@@ -252,7 +251,8 @@ void DMA2_Stream0_IRQHandler(void)
 void ADC3_IRQHandler(void)
 {
   /* USER CODE BEGIN ADC3_IRQn 0 */
-	ESPE_DMA_Trigger_Pretrigger();
+	//ESPE_DMA_Trigger_Pretrigger();
+	ESPE_DMA_COMP_Trigger_Pretrigger();
 	ESPE_DMA_data_manipulation();
 	if(0){
   /* USER CODE END ADC3_IRQn 0 */

@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "comp.h"
+#include "dac.h"
 #include "dma.h"
 #include "memorymap.h"
 #include "tim.h"
@@ -97,11 +99,14 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_TIM6_Init();
+  MX_COMP2_Init();
+  MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
 
   ESPE_TIM6_init();
   ESPE_ADC_init();
   ESPE_USART_init();
+  ESPE_COMP_init();
   DMA_setup_ADC();
   DMA_setup_USART();
   USART_start;
