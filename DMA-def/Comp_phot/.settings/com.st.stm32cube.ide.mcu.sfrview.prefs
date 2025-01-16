@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+sfrviewstate={"fFavorites"\:{"fLists"\:{"COMP"\:["STM32H743/COMP1"],"DAC"\:["STM32H743/DAC"],"DMA"\:["STM32H743/DMA1"]}},"fProperties"\:{"fNodeProperties"\:{"STM32H743/COMP1/SR"\:{"fNodeProperties"\:{"autoupdate"\:"false"}},"STM32H743/TIM6/CNT"\:{"fNodeProperties"\:{"autoupdate"\:"true"}},"STM32H743/DMA1/S0NDTR"\:{"fNodeProperties"\:{"autoupdate"\:"true"}},"STM32H743/ADC3/DR"\:{"fNodeProperties"\:{"autoupdate"\:"true"}}}}}

@@ -12,9 +12,8 @@
 #include <stdint.h>
 
 //key values
-#define vec_len 10000
-#define data_len 9000
-#define skip_value 10
+#define vec_len 200
+#define data_len 100
 #define Trigger_Value 30000
 #define Pretrigger_Value 20000
 #define char_trigger 'e'

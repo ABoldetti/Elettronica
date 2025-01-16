@@ -1,0 +1,55 @@
+/*
+ * ESPE_my_DMA.h
+ *
+ *  Created on: Nov 6, 2024
+ *      Author: aderf
+ */
+
+#ifndef INC_ESPE_MY_DMA_H_
+#define INC_ESPE_MY_DMA_H_
+
+
+
+//key values
+#define vec_len 400
+#define data_len 0
+#define Trigger_Value 5000
+#define Pretrigger_Value 2500
+#define char_trigger 'e'
+
+//renaming registers
+#define DMA_start_USART DMA2_Stream0->CR |= DMA_SxCR_EN
+#define DMA_stop_USART DMA2_Stream0->CR &= ~(DMA_SxCR_EN)
+#define DMA_start_ADC1 DMA1_Stream0->CR |= DMA_SxCR_EN
+#define DMA_start_ADC3 DMA1_Stream1->CR |= DMA_SxCR_EN
+#define ADC3_start ADC3-> CR |= ADC_CR_ADSTART
+#define ADC1_start ADC1-> CR |= ADC_CR_ADSTART
+#define USART_start USART3 ->CR1 |= USART_CR1_UE
+#define TIM6_start 	TIM6->CR1 |= TIM_CR1_CEN
+#define TIM6_stop 	TIM6->CR1 &= ~TIM_CR1_CEN
+
+
+//init functions
+void DMA_setup_ADC1(void);
+void DMA_setup_ADC3 (void);
+void DMA_reset(void);
+void DMA_setup_USART_ADC1(void);
+void DMA_setup_USART_ADC3(void);
+void ESPE_ADC1_init(void);
+void ESPE_ADC3_init(void);
+void ESPE_USART_init(void);
+void ESPE_COMP_init(void);
+void ESPE_TIM6_init(void);
+void ESPE_USART_char_start(void);
+void ESPE_DMA_switch_mode(void);
+void ESPE_DMA_switch_back(void);
+void ESPE_DMA_Trigger(void);
+void ESPE_DMA_Trigger_Pretrigger(void);
+void ESPE_DMA_data_manipulation(void);
+void ESPE_DMA_end_transmission(void);
+void ESPE_DMA_COMP_Trigger(void);
+void ESPE_DMA_COMP_Trigger_Pretrigger(void);
+void ESPE_DMA_Dual_ADC(void);
+
+
+#endif /* INC_ESPE_MY_DMA_H_ */

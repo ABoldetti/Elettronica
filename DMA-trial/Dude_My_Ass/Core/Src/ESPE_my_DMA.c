@@ -251,7 +251,7 @@ void ESPE_DMA_COMP_Trigger_Pretrigger(void){
 			}
 			return;
 		}
-		if( !(COMP12-> SR & COMP_SR_C2VAL)){
+		if( !(COMP12-> SR & COMP_SR_C2VAL) ){
 			flag_Pretriggered = 1;
 		}
 	}
