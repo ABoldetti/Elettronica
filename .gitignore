@@ -169,9 +169,5 @@ cython_debug/
 *.gz
 *.out
 *.toc
-Relazione.aux
-Relazione.log
-Relazione.pdf
-Relazione.synctex.gz
-Relazione.out
-Relazione.toc
+
+
