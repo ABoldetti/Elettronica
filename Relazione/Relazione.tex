@@ -1,24 +1,9 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper]{article}
 
 
-\usepackage[utf8]{inputenc}
-\usepackage[italian]{babel}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{minted}
-\usepackage[absolute]{textpos}	
-\usepackage{subcaption}  % Necessario per le sottocapitoli
-\usepackage[left=2cm,right=2cm,top=3cm,bottom=3cm]{geometry}
-\usepackage{bm}
-\usepackage{wrapfig}
-\usepackage{xcolor}
+\input{setup.tex}
 
-\definecolor{notebox}{RGB}{235, 236, 240}
-\geometry{a4paper, margin=1in}
-\hypersetup{colorlinks,urlcolor=blue}
+
 
 \title{Relazione di Elettronica}
 \author{Andrea Boldetti}
@@ -26,36 +11,38 @@
 
 \begin{document}
 
-\maketitle
+
+\includegraphics[left]{assets/Logo Bicocca.jpeg}
+
+\begin{center}
+        {\fontsize{23pt}{23pt}\selectfont\bfseries\fontfamily{ptm}\selectfont Esperimentazione di Elettronica \par}
+        \vspace{1cm} %è il modo per staccare le righe
+        {\fontsize{17pt}{22pt}\selectfont\fontfamily{ptm}\selectfont Andrea Boldetti \par}
+
+        \vspace{1cm}
+        {\centering\fontsize{20pt}{20pt}\selectfont\fontfamily{ptm}\selectfont \ \today \par}
+\end{center}
+ \vspace{5cm}
 
 \begin{abstract}
-%Relazione di laboratorio di Elettronica 2024/2025. In questa relazione vengono riassunte le %esperienze fatte in laboratorio,
-%la scheda usata è una \b{inserire nome scheda} ed è stato usato il programma dato dalla fabbrica produttirce STM.
+Relazione di laboratorio di Elettronica 2024/2025. In questa relazione vengono riassunte le esperienze fatte in laboratorio.\\
+Lo scopo di questa relazione è riassumere le esperienze fatte in laboratorio, includendo sia parti teoriche sulla struttura del microcontrollore che snippets di codici fatti. In bibliografia sarà presente un link a GitHub in cui sono contenuti codici a cui si fa riferimento e eventuali risultati.\\
 
-PENE
+
+
 
 \end{abstract}
 
 \newpage
-\tableofcontents
+{
+    \hypersetup{linkcolor=black}
+    \tableofcontents
+}
+\newpage
+\input{microcontrollore.tex}
 
-\section{Introduzione}
-Inserisci qui l'introduzione.
 
-\section{Microcontrollore}
-\subsection{Funzionamento generale}
-
-\subsection{GPIO}
-
-\subsection{USART}
-
-\subsection{ADC}
-
-\subsection{DMA}
-
-\subsection{DAC e Comparatore}
-
-\input{Analog.tex}
+\input{analog/Analog.tex}
 
 \section{Risultati}
 Inserisci qui i risultati.
