@@ -3,7 +3,7 @@
 
 \begin{wrapfigure}{R}{.4\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{assets/OP27/OP27_datasheet.png}
+    \includegraphics[width=\linewidth]{analog/assets/OP27/OP27_datasheet.png}
     \caption{Feature OP27}
 \end{wrapfigure}
 
@@ -21,11 +21,11 @@ invertente e configuraizone non invertente come mostrato in figura:
 \begin{figure}[!h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=0.9\textwidth]{assets/scheda analogica/invertente.png}
+        \includegraphics[width=0.9\textwidth]{analog/assets/scheda analogica/invertente.png}
         \caption{configurazione invertente}
     \end{subfigure}%
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=0.9\textwidth]{assets/scheda analogica/non_invertente.png}
+        \includegraphics[width=0.9\textwidth]{analog/assets/scheda analogica/non_invertente.png}
         \caption{configurazione non invertente}
     \end{subfigure}
 \end{figure}
@@ -53,7 +53,7 @@ Per questa modalità è stato impostato un segnale sinusoidale all'ingresso non 
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\linewidth]{assets/OP27/Non Invertente/Sin_2k2.pdf}
+    \includegraphics[width=0.5\linewidth]{analog/assets/OP27/Non Invertente/Sin_2k2.pdf}
     \caption{Segnali di uscita dall'amplificatore per frequenza a risposta piatta e a -3dB, (\href{https://github.com/Yedi278/Esperimentazioni-Elettronica/tree/main/-\%20OPAMP/OP27/Non-Invertente/R1\%3D2.2k\%2CR2\%3D2.2k}{link dati})}
 \end{figure}
 
@@ -66,7 +66,7 @@ Per questa modalità è stata impostata nel generatore un'onda quadra e tramite 
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\linewidth]{assets/OP27/Non Invertente/Square_2k2.pdf}
+    \includegraphics[width=0.5\linewidth]{analog/assets/OP27/Non Invertente/Square_2k2.pdf}
     \caption{Risposta ad onda quadra, (\href{https://github.com/Yedi278/Esperimentazioni-Elettronica/tree/main/-\%20OPAMP/OP27/Non-Invertente/R1\%3D2.2k\%2CR2\%3D2.2k}{link dati})}
 \end{figure}
 \pagebreak
@@ -121,7 +121,7 @@ Risulta quindi la seconda ipotesi, ovvero che l'OP27 non sia accettabile come am
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.3\linewidth]{assets/OP27/OP27_Phase_Margin.png}
+    \includegraphics[width=0.3\linewidth]{analog/assets/OP27/OP27_Phase_Margin.png}
     \caption{Matgine di fase OP27}
 \end{figure}
 
@@ -145,7 +145,7 @@ dove $t_m$ è il rise time misurato e $t_g$ il rise time del generatore da solo.
 
 \begin{wrapfigure}{R}{.4\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{assets/OP27/Non Invertente/FFT_2k2.pdf}
+    \includegraphics[width=\linewidth]{analog/assets/OP27/Non Invertente/FFT_2k2.pdf}
     \caption{ (\href{https://github.com/Yedi278/Esperimentazioni-Elettronica/tree/main/-\%20OPAMP/OP27/Non-Invertente/R1\%3D2.2k\%2CR2\%3D2.2k}{link dati})}    
 \end{wrapfigure}
 
@@ -168,7 +168,7 @@ Ripetendo il processo eseguito prima per valori di $R_2 = \{2.2k\Omega, 8.2k\Ome
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=.5\linewidth]{assets/OP27/Non Invertente/Non_Invert_Dati_tot.pdf}
+    \includegraphics[width=.5\linewidth]{analog/assets/OP27/Non Invertente/Non_Invert_Dati_tot.pdf}
         \captionof{figure}{Rappresentazione grafica dell'andamento per configurazione Non-invertente}
         \label{fig:OP27 overshoot non invertente}
 \end{figure}
@@ -204,17 +204,17 @@ L'altra configurazione interessante per un amplificatore è quella invertente in
 
     \centering
     \begin{minipage}[b]{0.3\textwidth}
-        \includegraphics[width=\linewidth]{assets/OP27/Invertente/Sin_17k8.pdf}
+        \includegraphics[width=\linewidth]{analog/assets/OP27/Invertente/Sin_17k8.pdf}
         \captionof{figure}{Analisi con segnale sinusiodale}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth} 
-        \includegraphics[width=\linewidth]{assets/OP27/Invertente/Square_17k8.pdf}
+        \includegraphics[width=\linewidth]{analog/assets/OP27/Invertente/Square_17k8.pdf}
         \captionof{figure}{Analisi con onda quadra (overshoot $<$ 20\%)}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
-        \includegraphics[width=\linewidth]{assets/OP27/Invertente/FFT_17k8.pdf}
+        \includegraphics[width=\linewidth]{analog/assets/OP27/Invertente/FFT_17k8.pdf}
         \captionof{figure}{Analisi nel dominio delle frequenze}
     \end{minipage}
     \hfill    
@@ -227,7 +227,7 @@ Applicando il processo di misura per varie resistenze $R_2 = \{ 2.2k\Omega, 8.2k
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=.5\linewidth]{assets/OP27/Invertente/OP27_Invert_Dati_tot.pdf}
+    \includegraphics[width=.5\linewidth]{analog/assets/OP27/Invertente/OP27_Invert_Dati_tot.pdf}
     \captionof{figure}{Rappresentazione grafica dell'andamento per configurazione Non-invertente}
 \end{figure}
 
@@ -253,7 +253,7 @@ L'unione dei dati presi tramite le due configurazioni porta al seguente andament
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=\linewidth]{assets/OP27/Inv+Non-Inv.pdf}
+    \includegraphics[width=\linewidth]{analog/assets/OP27/Inv+Non-Inv.pdf}
     \caption{Valori di banda calcolati tramite le tre configurazioni per Invertente e Non-inv, (\href{https://github.com/Yedi278/Esperimentazioni-Elettronica/tree/main/-\%20OPAMP/OP27}{link dati})
     }
 \end{figure}
