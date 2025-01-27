@@ -165,7 +165,7 @@ cython_debug/
 # Latex Files
 *.aux
 *.log
-*.pdf
+Relazione.pdf
 *.gz
 *.out
 *.toc
