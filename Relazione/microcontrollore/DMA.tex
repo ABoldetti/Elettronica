@@ -36,8 +36,10 @@ Una volta configurato su STM32CubeMX, c'è bisogno di configurare specificatamen
 In generale, questo tipo di configurazione può essere riassunta in 4 righe di codice. Usiamo come esempio il DMA per l'ADC:
 
 \begin{minted}[bgcolor = coding, linenos]{C}
-    DMA1_Stream0 -> PAR = (uint32_t) &ADC3->DR; // Collega il DMA all'ADC
-    DMA1_Stream0 -> M0AR = (uint32_t) &vec_dati; // Collega il DMA alla memoria
+    DMA1_Stream0 -> PAR = (uint32_t) &ADC3->DR; //Collegare il DMA al registro
+                                                //che contiene il dato
+    DMA1_Stream0 -> M0AR = (uint32_t) &vec_dati; //Dare al DMA l'indirizzo della memoria
+                                                //in cui salvare il dato
     DMA1_Stream0 -> NDTR = len; // Dimensione del dato
     ADC3 -> CFGR |=(3<<ADC_CFGR_DMNGT_Pos); // Configura l'ADC per usare il DMA
 \end{minted}
