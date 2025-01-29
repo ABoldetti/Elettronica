@@ -1,9 +1,9 @@
 \pagebreak
-\subsection{Universal Synchronous Asynchronous Receiver Transmitter (USART)}
+\section{Universal Synchronous Asynchronous Receiver Transmitter (USART)}
 La prima periferica usata è stata la USART. Usart ci permette di comunicare con il PC attraverso la Seriale.
 \\
 
-\subsubsection{Funzionamento}
+\subsection{Funzionamento}
 Seppur la periferica permetta il trasferimento sicrono dei dati, noi la useremo come USART, quindi una versione precedente.\\
 
 Questa periferica per funzionare ha bisogno di un collegamento diretto con il dispositivo a cui comunicare, questo collegamento nel nostro cavo consiste in 3 cavi: TX, RX e GND.\\
@@ -32,7 +32,7 @@ La velocità di trasmissione è misurata in baud, ovvero il numero di bit trasme
 Per evitare problemi di lettura, il ricevitore overcampiona i dati per poi farne una media. Così facendo, il rumore dovuto a cavi troppo lunghi o a interferenze elettromagnetiche viene minimizzato.\\
 
 
-\subsubsection{Programmazione}
+\subsection{Programmazione}
 Usart, nel nostro caso, è stato usare nel seguente modo: Inizialmente abbiamo spedito un carattere specifico dal pc al microcontrollore, questo carattere l'abbiamo usato come trigger per far partire la lettura dei dati, finita la lettura dei dati abbiamo trasmesso tutti i dati al computer.\\
 
 \noindent

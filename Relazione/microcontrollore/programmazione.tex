@@ -17,5 +17,17 @@ Il programma si divide in diversi file:
 
 Questi sono solo alcuni dei file presenti nel progetto, ma sono quelli che effettivamente modificati dall'utente.
 
+\subsubsection{ Interrupt }
+Tutte le implementazioni delle funzionalità sono state fatte usando i relativi Interrupt. Un interrupt è un segnale che viene inviato alla CPU per interrompere l'istruzione in corso e dare priorità ad un'altra istruzione. Questo meccanismo permette di rimanere in attesa di un evento senza dover per forza limitarsi a controllare ciclicamente se è avvenuto.\\
+Così facendo si è in grado di fare più cose contemporaneamente e di ottimizzare la velocità di esecuzione del programma.\\
 
+Ogni periferica ha uno o più interrupt dedicati che vengono attivati con eventi diversi. In particolare:
+\begin{itemize}
+    \item \textbf{USART}: Ha un interrupt dedicato per la ricezione e uno per la trasmissione, che vengono chiamati quando il buffer in ricezione è pieno o quando il buffer in trasmissione è vuoto.
+    \item \textbf{ADC}: Ha un interrupt dedicato per la fine della conversione, che viene chiamati quando il valore analogico è stato convertito in digitale.
+    \item \textbf{DMA}: Ha un interrupt dedicato per la fine del trasferimento, che viene chiamato quando il trasferimento di dati è finito.
+    \item \textbf{Timer}: Ha un interrupt dedicato per la fine del conteggio, che viene chiamato quando il timer ha finito di contare.
+\end{itemize}
+
+Per ogni interrupt, esiste una funzione creata ad hoc che possiamo riempire con il codice che vogliamo e che possiamo decidere se attivare o disattivare a piacimento.
 

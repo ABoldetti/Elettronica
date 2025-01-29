@@ -1,8 +1,8 @@
 \pagebreak
-\subsection{Analog Digital Converter (ADC)}
+\section{Analog Digital Converter (ADC)}
 L'ADC è una periferica che permette di convertire un segnale analogico in un segnale digitale. 
 
-\subsubsection{Funzionamento}
+\subsection{Funzionamento}
 Per convertire valori analogici in digitale esistono diversi metodi, il microcontrollore usato usa il metodo di conversione ad approssimazioni successive.\\
 
 Seppur questo metodo non permette di avere i dati convertiti istantaneamente come può essere un Flash ADC, permette di avere una maggiore precisione e di avere un errore minore.\\
@@ -20,7 +20,7 @@ Così facendo, il microcontrollore può ricavare con precisione e con poche iter
 
 Altri aspetti positivi di questo metodo sono la presenza di un singolo compartore, il quale permette di diminuire notevolmente l'errore nella misura e la presenza di registri per la ricerca binaria, i quali rendono il processo più veloce di altri metodi.\\
 
-\subsubsection{Programmazione}
+\subsection{Programmazione}
 Parte importante della programmazione con l'ADC è la calibrazione dell'apparato. Infatti, prima dell'utilizzo
 
 \noindent
@@ -65,8 +65,44 @@ Parte importante della programmazione con l'ADC è la calibrazione dell'apparato
 	ADC3 -> SMPR1 |= 0<<ADC_SMPR1_SMP0_Pos;
         //Possiamo aggiungere un ritardo di (n = 0) cicli prima della lettura
 
-}
+    }
 \end{minted}
 \label{code:ADC_init}
 
 Oltre a impostare le misure da fare e il numero di misure che ogni ADC deve fare su ogni pin, all'interno della funzione è contenuto il processo di calibrazione dell'ADC. La calibrazione è fatta automaticamente dal microcontrollore usando dei valori di riferimento ma questo processo occupa tempo e, se non si aspettasse la fine della calibrazione per prendere la misura si avrebbero valori errati. Quindi c'è bisogno di un ciclo \textit{while()} per aspettare la fine della calibrazione.\\
+
+La calibrazione è fatta accedendo a 2 Registri in particolare: il registro CR e il registro ISR. Il primo contiene i bit per la calibrazione e l'attivazione dell'ADC, mentre il secondo contiene i bit per controllare lo stato dell'ADC.\\
+
+Una volta finita la calibrazione,  scrivendo
+\noindent
+
+\begin{minted}[bgcolor = coding]{C}
+    ADC3-> CR |= ADC_CR_ADSTART
+\end{minted}
+l'ADC inizia a prendere le misure.\\
+Per leggere i dati, invece, si può inserire nell'interrupt una funzione dedicata del tipo:
+
+\noindent
+\begin{minted}[bgcolor=coding , linenos]{C}
+
+    #define len_vec 100
+    uint_16 vec[len_vec];
+    uint_8 counter_ADC = 0;
+    uint_8 conversion_flag = 0;
+
+    void ESPE_ADC_data(void){
+        if( counter_ADC < len_vec){
+            vec[counter_ADC] = ADC3->DR;
+            counter_ADC++;
+        }else{
+            conversion_flag = 1;
+            ADC3-> CR &= ~ADC_CR_ADSTART;
+        }
+    }
+
+\end{minted}
+\label{code:ADC_data}
+
+In questo codice, il registro DR, il Data Register, contiene il valore misurato dall'ADC in Volt. Se il valore che si vuole non è in volt, è necessario fare una conversione. La conversione dipende da fattori come la tensione di riferimento dell'apparecchio che fa la misura e il valore massimo misurabile dall'ADC.\\
+
+L'ultima riga, invece è necessaria per fermare l'ADC una volta che ha finito di prendere le misure.\\
