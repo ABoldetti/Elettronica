@@ -8,6 +8,7 @@ Seppur la periferica permetta il trasferimento sicrono dei dati, noi la useremo 
 
 Questa periferica per funzionare ha bisogno di un collegamento diretto con il dispositivo a cui comunicare, questo collegamento nel nostro cavo consiste in 3 cavi: TX, RX e GND.\\
 
+
 \noindent
 \begin{minipage}[c]{0.54\linewidth}
     \begin{itemize}
@@ -48,7 +49,7 @@ void ESPE_USART_char_start(void){
 \end{minted}
 \label{code:USART_start}
 
-Nel codice \ref{code:USART_start}, andiamo ad usare 2 registri di USART: ISR e RDR. Il primo, l'Interrupt Status Register, contiene flag per controllare lo status di USART, mentre il secondo, il Receive Data Register, contiene il dato ricevuto.\\
+Nel codice {\hypersetup{linkcolor=black}\ref{code:USART_start}}, andiamo ad usare 2 registri di USART: ISR e RDR. Il primo, l'Interrupt Status Register, contiene flag per controllare lo status di USART, mentre il secondo, il Receive Data Register, contiene il dato ricevuto.\\
 
 \noindent
 \begin{minted}[bgcolor = coding, linenos]{C}
@@ -93,6 +94,7 @@ void ESPE_USART_invert_mode(void){
 }
 \end{minted}
 
-Questa funzione cambia il metodo di trigger dell'interrupt di USART, così facendo si evitano problemi di trigger dell'interrupt in lettura mentre l'invio è in corso o viceversa.\\
+Questa funzione cambia il metodo di trigger dell'interrupt di USART, così facendo si evitano problemi con interrupt in lettura mentre l'invio è in corso o viceversa.\\
+
 
 
