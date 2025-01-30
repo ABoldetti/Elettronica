@@ -49,3 +49,12 @@ e poi si attiva il DMA con la funzione:
 \begin{minted}[bgcolor = coding, linenos]{C}
     DMA1_Stream0->CR |= DMA_SxCR_EN // Attiva il DMA
 \end{minted}
+
+\begin{flushleft}
+
+    \colorbox{notebox}{
+    \begin{minipage}[]{\textwidth}
+        Notiamo come, anche se il DMA è attivo, ciò non va a modificare il funzionamento degli interrupt. Anche se il DMA controlla il flusso dei dati, noi possiamo comunque accedere a qualsiasi dato (misurato o trasmesso) in qualsiasi momento.
+    \end{minipage}
+    }
+\end{flushleft}

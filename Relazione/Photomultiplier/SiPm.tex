@@ -1,8 +1,6 @@
 \pagebreak
 \subsection{SiPm}
-La parte finale della caratterizzazione della scheda richiede lo studio del rilevatore al suo interno, ovvero un SiPm (Silicon Photo Multiplier).
-
-Questo rilevatore presenta al suo interno il sistema composto da SPAD e resistenze di quenching che permette la creazione di valanghe di elettroni controllate all'interno del rilevatore fino ad ottenere una risoluzione al singolo fotone.
+Il rilevatore presenta al suo interno il sistema composto da SPAD e resistenze di quenching che permette la creazione di valanghe di elettroni controllate all'interno del rilevatore fino ad ottenere una risoluzione al singolo fotone.
 
 \subsubsection{Setup}
 
@@ -10,28 +8,28 @@ Siccome la tensione generata dal SiPm è troppo bassa per la risoluzione dell'AD
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\linewidth]{analog/assets/SiPm/SiPm_Stadi_Amp.png}
+    \includegraphics[width=0.5\linewidth]{Photomultiplier/assets/SiPm/SiPm_Stadi_Amp.png}
     \caption{Stadi di amplificazione}
     \label{fig:SiPm stadi di amp}
 \end{figure}
 
-Siccome i tempi di esistenza del segnale sono molto bassi, nell'ordine dei 100-200ns, risulta difficile ottenere una misurazione accurata con l'ADC che è limitato a campionamenti nell'ordine dei 200ns. Per questo è stato usato un sistema di Peak Hold:
+Siccome i tempi di esistenza del segnale sono molto bassi, nell'ordine dei 100-200ns, risulta difficile ottenere una misurazione accurata con l'ADC che è limitato a campionamenti nell'ordine dei 300ns. Per questo è stato usato un sistema di Peak Hold:
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\linewidth]{analog/assets/SiPm/SiPm_Peak_hold.png}
+    \includegraphics[width=0.5\linewidth]{Photomultiplier/assets/SiPm/SiPm_Peak_hold.png}
     \caption{Sistema di Peak Hold}
 \end{figure}
 
 All'uscita del peak hold la tensione viene mantenuta per un tempo sufficiente per l'acquisizione dell'ADC.
 
-Come mostrato in figura \ref{fig:SiPm stadi di amp}, il rilevatore che si comporta come diodo è inserito in polarizzazione inversa nella scheda in maniera tale da sfruttarne la tensione di breakdown. Per comprendere la polarizzazione, è stata impostata inizialmente sull'alimentatore una tensione bassa e corrente limitata per controllare la polarizzazione corretta. Avendo inserito nei suoi pin la fonte luminosa a LED, è stata sigillata la zona contenente fonte luminosa e rilevatore. Successivamente, la tensione fornita al SiPm è stata portata a +3V di Overvoltage per permettere l'avvento della valanga di elettroni nello SPAD.
+Per comprendere la polarizzazione, è stata impostata inizialmente sull'alimentatore una tensione bassa e corrente limitata per controllare la polarizzazione corretta. Avendo inserito nei suoi pin la fonte luminosa a LED, è stata sigillata la zona contenente fonte luminosa e rilevatore. Successivamente, la tensione fornita al SiPm è stata portata a +3V di Overvoltage per permettere l'avvento della valanga di elettroni nello SPAD.
 
 Fornendo al LED una tensione impulsata di 100 ns a circa 3.4 V è stato possibile osservare la rilevazione dei fotoni:
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\linewidth]{analog/assets/SiPm/SiPm.png}
+    \includegraphics[width=0.5\linewidth]{Photomultiplier/assets/SiPm/SiPm.png}
     \caption{Prima visualizzazione dei segnali con persistance di 2 sec}
 \end{figure}
 
@@ -45,7 +43,7 @@ Per caratterizzare il SiPm è utile avere una stima di questo fenomeno. Per ques
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.6\linewidth]{analog/assets/SiPm/SiPm_DCR.pdf}
+    \includegraphics[width=0.6\linewidth]{Photomultiplier/assets/SiPm/SiPm_DCR.pdf}
     \caption{Tempi per conteggio di 40000 eventi, (\href{https://github.com/Yedi278/Esperimentazioni-Elettronica/tree/main/SiPm/Caratterizzazione\%20Hamamatsu}{link dati})}
 \end{figure}
 

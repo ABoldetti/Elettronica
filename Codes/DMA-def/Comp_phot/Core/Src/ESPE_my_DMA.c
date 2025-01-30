@@ -199,12 +199,10 @@ void ESPE_DMA_switch_back(void){
 
 void ESPE_DMA_Trigger(void){
 	if(!flag_Triggered && flag_Trigger_EN){
-		//TIM6_stop;
 		if( ADC3 -> DR > Trigger_Value){
 			flag_Triggered = 1;
 			flag_Trigger_EN = 0;
 		}
-		//TIM6_start;
 	}
 }
 
