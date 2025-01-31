@@ -25,17 +25,6 @@ All'uscita del peak hold la tensione viene mantenuta per un tempo sufficiente pe
 
 Per comprendere la polarizzazione, è stata impostata inizialmente sull'alimentatore una tensione bassa e corrente limitata per controllare la polarizzazione corretta. Avendo inserito nei suoi pin la fonte luminosa a LED, è stata sigillata la zona contenente fonte luminosa e rilevatore. Successivamente, la tensione fornita al SiPm è stata portata a +3V di Overvoltage per permettere l'avvento della valanga di elettroni nello SPAD.
 
-Fornendo al LED una tensione impulsata di 100 ns a circa 3.4 V è stato possibile osservare la rilevazione dei fotoni:
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{Photomultiplier/assets/SiPm/SiPm.png}
-    \caption{Prima visualizzazione dei segnali con persistance di 2 sec}
-\end{figure}
-
-E evidente la presenza di diverse zone con elevata densità di rilevazioni
-che corrispondono a 1 fotone, 2 fotoni, 3 fotoni etc...
-
 \subsubsection{Dark Count Rate}
 Siccome gli elettroni nello spad sono soggetti ad agitazione termica, è possibile che un elettrone riesca casualmente a liberarsi anche senza la presenza di un fotone, portando a una valanga non desiderata. Questo è noto come DCR (Dark Count Rate).
 

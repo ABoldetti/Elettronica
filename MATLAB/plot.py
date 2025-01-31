@@ -1,18 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 
-# Read data from CSV file
-data = pd.read_csv('Elettronica/MATLAB/data.csv')
-print(data.size)
+os.chdir(os.path.dirname(__file__))
 
-data = data.to_numpy().T
+hist_dark_phot = pd.read_csv('Dark Photon/hist_dark_phot.csv', delimiter=',', header=None)
+hist_phot = pd.read_csv('Presa-mia Micro/hist_phot_3.4V.csv', delimiter=',', header=None)
 
-plt.plot(np.arange(len(data[0])), data[0])
+hist_dark_phot = hist_dark_phot.to_numpy()[0]
+hist_phot = hist_phot.to_numpy()[0]
 
+bin_d , edg_d = np.histogram(hist_dark_phot , bins=200)
+bin_p , edg_p = np.histogram(hist_phot , bins=200)
+
+bin = bin_p-(bin_d/20)
+plt.hist(edg_p[:-1], bins=edg_p, weights=bin)
 plt.show()
-
-# for i in data.columns:
-#     plt.plot(data[i])
-# plt.show()
 
