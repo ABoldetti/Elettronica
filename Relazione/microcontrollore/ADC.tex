@@ -1,4 +1,4 @@
-\pagebreak
+
 \section{Analog Digital Converter (ADC)}
 L'ADC è una periferica che permette di convertire un segnale analogico in un segnale digitale. Seppur, con la \textit{differential mode}, si possono prendere segnali positivi e negativi, per semplificare il processo, si userà l'ADC in modalità single-ended e quindi si prenderanno solo segnali positivi.\\
 
@@ -90,6 +90,7 @@ Per leggere i dati, invece, si può inserire nell'interrupt una funzione dedicat
     uint_8 counter_ADC = 0;
     uint_8 conversion_flag = 0;
 
+    
     void ESPE_ADC_data(void){
         if( counter_ADC < len_vec){
             vec[counter_ADC] = ADC3->DR;
