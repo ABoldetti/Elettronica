@@ -1,17 +1,16 @@
 \pagebreak
 \section{Microcontrollore}
+Un microcontrollore è un dispositivo elettronico programmabile con al suo interno un microprocessore e altre funzionalità utili per il controllo di sistemi elettronici.\\
 Il microcontrollore usato  è il NUCLEO H743ZI2 ed è stato usato il programma dato dalla fabbrica produttrice, STM.\\
 \subsection{Funzionamento generale}
 \subsubsection{Struttura interna}
-Il $\mu$ - controllore usato sfrutta la struttura interna di Harvard, ovvero con 2 memorie separate: una per i programmi e una per i dati.\\
+Il $\mu$ - controllore usato sfrutta la struttura interna di Harvard. La memoria del microcontrollore è quindi divisa in due parti: una per le istruzioni e una per i dati. Con l'ulteriore suddivisione della memoria, questa struttura è più costosa di quella standard sia in termini di costo che in termini di energia in quanto ogni parte che collega la CPU alla memoria deve essere duplicata e la CPU deve essere in grado di gestire due bus di memoria.\\
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{microcontrollore/assets/Harvard.png}
     \caption{Struttura interna del microcontrollore}
 \end{figure}
 Questa architettura, unita ad un doppio bus asincrono, permette di eseguire più operazioni in parallelo, aumentando la velocità di esecuzione. Un esempio del perchè questa architettura sia più veloce deriva dal fatto che in un singolo colpo di clock, il microcontrollore sia in grado di leggere l'istruzione e interagire con il dato da modificare.\\
-
-Unita al doppio processore Cortex M7 e M4 e il clock da 480 MHz, l'architettura Harvard permette a questa scheda di essere l'ideale per processi molto complessi ma che hanno bisogno di estrema velocità.\\
 
 \subsubsection{Memoria}
 All'interno del microcontrollore esistono 3 tipi di memoria:
@@ -21,16 +20,12 @@ All'interno del microcontrollore esistono 3 tipi di memoria:
     \item ROM: Una memoria non volatile di sola lettura. Viene scritta dai produttori e contiene informazioni fondamentali per il corretto funzionamento del microcontrollore, oltre alla definizione di registri e celle di memoria speciale.
 \end{itemize}
 Ogni memoria è divisa in celle, ognuna delle dimensioni di un byte e caratterizzata da un indirizzo unico. Per salvare dati più grandi di un byte, si usano più celle contigue, così che sapendo dimensione del dato e indirizzo di partenza, si possa trovare univocamente il dato.\\
-La memoria è connessa alla CPU con dei BUS dedicati, per accedere alle celle, la cpu abilita delle uscite dallo stato di alta impedenza.
+La memoria è connessa alla CPU con dei BUS dedicati.
 
-Per quanto riguarda la RAM, oltre ad essere divisa in celle, i produttori della scheda dividono la memoria in registri. Dandogli dei ruoli spceifici all'interno della CPU. Questa divisione permette di avere un modo più semplice di collegare le celle di memoria al loro significato e permette alla CPU di lavorare in maniera più efficiente sulle celle di memoria a utilizzi speciali.
+Per quanto riguarda la RAM, oltre ad essere divisa in celle, i produttori della scheda dividono la memoria dedicata alle periferiche in registri. Dandogli dei ruoli specifici all'interno della CPU. Questa divisione permette di avere un modo più semplice di collegare le celle di memoria al loro significato e permette alla CPU di lavorare in maniera più efficiente sulle celle di memoria a utilizzi speciali.
 
-Mentre, nella memoria Flash, i programmi sono salvati in pile di celle di memoria, ognuna con un codice operativo che, letto dalla CPU, si trasforma in un'istruzione. L'istruzione in questione non ha accesso solo alla RAM in cui sono contenuti i dati di esecuzione ma anche alla memoria flash stessa; questo permette alla CPU di saltare istruzioni nel caso in cui non siano richiesti.
+Nella memoria Flash, invece, i programmi sono salvati in pile di celle di memoria, ognuna con un codice operativo che, letto dalla CPU, si trasforma in un'istruzione. L'istruzione in questione non ha accesso solo alla RAM in cui sono contenuti i dati di esecuzione ma anche alla memoria flash stessa; questo permette alla CPU di saltare istruzioni o di ripeterle nel caso in cui sia richiesto.
 
-\subsubsection{Interrupt}
-Un'altra caratteristica fondamentale dei computer in generale ma anche dei microcontrollori, sono gli Interrupt. Gestiti da una componente specifica all'interno del microprocessori, sono segnali che vengono inviati alla CPU per interrompere l'istruzione in corso, dando priorità ad un'altra istruzione. Questo meccanismo permette di rimanere in attesa di un evento senza dover per forza limitarsi a controllare ciclicamente se è avvenuto.\\
-
-Seppur molto utile, l'uso degli interrupt complica la programmazione e la leggibilità del codice.
 
 
 \subsection{Periferiche}
@@ -44,7 +39,7 @@ Il microcontrollore è dotato di diverse periferiche e funzionalità ma noi siam
     \item Digital Analog Converter (DAC)
     \item Comparatore
 \end{itemize}
-Queste funzionalità sono quelle utili per essere in grado di leggere dati analogici presi da un sensore e salvarli ad un PC.
+In particolare, USART è utile per trasmettere dati al computer con la seriale, l'ADC per leggere dati analogici, il timer per triggerare il tempo tra una misura e l'altra in modo da avere misure equidistanti, il DMA per trasferire i dati tra la memoria e le periferiche senza l'intervento della CPU e il DAC e il comparatore per creare dei meccanismi di trigger hardware.
 
 
 

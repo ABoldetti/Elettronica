@@ -1,33 +1,33 @@
 
 
 \subsection{Programmazione}
-Per programmare sul microcontrollore è stato usato il programma STM32CubeIDE, un IDE fornito dalla STMicroelectronics. Il linguaggio di programmazione usato è C99. All'interno dell'IDE sono inserite delle librerie che permettono di interfacciarsi con le periferiche del microcontrollore, le quali contengono gli indirizzi dei registri e le maschere per collegare ogni bit dei registri al funzionamento sulla periferica.\\
+Per programmare sul microcontrollore è stato usato il programma STM32CubeIDE, un IDE fornito dalla STMicroelectronic, con il supporto di STM32CubeMX un programma di generazione codice apposito per schede della STM per la configurazione delle periferiche. Il linguaggio di programmazione usato è C99. All'interno dell'IDE sono inserite delle librerie che permettono di interfacciarsi con le periferiche del microcontrollore, le quali contengono funzioni di handling delle periferiche, indirizzi di registri specifici e le maschere per collegare ogni bit dei registri al funzionamento sulla periferica.\\
 
 I registri prendono il nome dalla periferica che controllano e ogni registro è diviso in sottoregistri a cui si può accedere usando i puntatori.
 
 Per modificare i registri è consigliato usare maaschere, quindi dei numeri binari che, se applicate delle operazioni di AND e OR permettono di andare a modificare solo determinati bit.
 
 \subsubsection{Struttura del programma}
-Il programma si divide in diversi file:
+Il programma in sè è diviso in diverse cartelle con all'interno diverse funzioni utili per il buon funzionamento del programma.
+Grazie a STM32CubeMX, però, si useranno solo i file principali del programma, che sono:
 \begin{itemize}
     \item \textbf{main.c}: Il file principale del programma, contiene la funzione main() e le funzioni di inizializzazione delle periferiche. Il compilatore lancia il programma a partire da questo file.
     \item \textbf{stm32h7xx$\_$it.c}: Il file contenente tutti gli interrupt abilitati. Ogni interrupt è una funzione diversa che non comunica direttamente con il resto.
     \item \textbf{Librerie create dall'utente}: File contenenti le funzioni create dall'utente per interfacciarsi con le periferiche.
 \end{itemize}
 
-Questi sono solo alcuni dei file presenti nel progetto, ma sono quelli che effettivamente modificati dall'utente.
-
 \subsubsection{ Interrupt }
-Tutte le implementazioni delle funzionalità sono state fatte usando i relativi Interrupt. Un interrupt è un segnale che viene inviato alla CPU per interrompere l'istruzione in corso e dare priorità ad un'altra istruzione. Questo meccanismo permette di rimanere in attesa di un evento senza dover per forza limitarsi a controllare ciclicamente se è avvenuto.\\
-Così facendo si è in grado di fare più cose contemporaneamente e di ottimizzare la velocità di esecuzione del programma.\\
+Un'altra caratteristica fondamentale dei computer in generale ma in particolare dei microcontrollori, sono gli Interrupt. Gestiti da una componente specifica all'interno del microprocessori, sono segnali che vengono inviati alla CPU per interrompere l'istruzione in corso, dando priorità ad un'altra istruzione. Questo meccanismo permette di rimanere in attesa di un evento senza dover per forza limitarsi a controllare ciclicamente se è avvenuto.\\
+Seppur molto utile, l'uso degli interrupt complica la programmazione e la leggibilità del codice.
 
-Ogni periferica ha uno o più interrupt dedicati che vengono attivati con eventi diversi. In particolare:
+Tutte le implementazioni delle funzionalità sono state fatte usando i relativi Interrupt.
+Ogni periferica ha uno o più interrupt dedicati che vengono attivati con eventi diversi. In particolare, quelli usati sono:
 \begin{itemize}
     \item \textbf{USART}: Ha un interrupt dedicato per la ricezione e uno per la trasmissione, che vengono chiamati quando il buffer in ricezione è pieno o quando il buffer in trasmissione è vuoto.
     \item \textbf{ADC}: Ha un interrupt dedicato per la fine della conversione, che viene chiamati quando il valore analogico è stato convertito in digitale.
-    \item \textbf{DMA}: Ha un interrupt dedicato per la fine del trasferimento, che viene chiamato quando il trasferimento di dati è finito.
+    \item \textbf{DMA}: Ha un interrupt dedicato per la fine del trasferimento, che viene chiamato quando il trasferimento di dati è finito o quando la memoria associata è piena.
     \item \textbf{Timer}: Ha un interrupt dedicato per la fine del conteggio, che viene chiamato quando il timer ha finito di contare.
 \end{itemize}
 
-Per ogni interrupt, esiste una funzione creata ad hoc che possiamo riempire con il codice che vogliamo e che possiamo decidere se attivare o disattivare a piacimento.
+Per ogni interrupt, esiste una funzione creata ad hoc che possiamo riempire con il codice che vogliamo e che possiamo decidere se attivare o disattivare a piacimento. Questa funzione è contenuta in \textit{stm32h7xx$\_$it.c} e ha il nome della periferica. Nel caso in cui la periferica abbia più interrupt, dipende da funzione a funzione: nel caso di USART, quello che cambia sono i flag abilitati che fanno capire all'interrupt quando attivarsi, nel caso del DMA all'interno della periferica sono definiti diversi Stream ognuno con il proprio interrupt.
 

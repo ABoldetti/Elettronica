@@ -20,9 +20,7 @@ Così facendo, oltre alla CPU più libera, i dati saranno salvati direttamente d
 \subsection{Programmazione}
 Dato che il protocollo del DMA ti permette di salvare i dati in autonomia, la parte di programmazione consiste solo nel configurare correttamente il DMA.\\
 
-
-
-Dato che può essere molto complesso, parte della configurazione è stata fatta con il code generator di STM32CubeIDE e consiste nel collegare uno \textit{stream} del DMA alla periferica che si vuole usare e dargli la dimensione del dato e in che tipo di memoria si vuole salvare.\\
+In quanto molto complesso, parte della configurazione è stata fatta con il code generator di STM32CubeIDE e consiste nel collegare uno \textit{stream} del DMA alla periferica che si vuole usare e dargli la dimensione del dato e in che tipo di memoria si vuole salvare.\\
 
 \begin{wrapfigure}{r}{0.4\linewidth}
     \centering
@@ -56,5 +54,5 @@ e poi si attiva il DMA con la funzione:
     \begin{minipage}[]{\textwidth}
         Notiamo come, anche se il DMA è attivo, ciò non va a modificare il funzionamento degli interrupt. Anche se il DMA controlla il flusso dei dati, noi possiamo comunque accedere a qualsiasi dato (misurato o trasmesso) in qualsiasi momento.
     \end{minipage}
-    }
+}
 \end{flushleft}

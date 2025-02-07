@@ -1,6 +1,7 @@
 \pagebreak
 \section{Digital Analog Converter (DAC) e Comparatore}
-Il DAC e il Comparatore, seppur 2 periferiche diverse, sono trattate insieme in quanto sono usate come trigger: il DAC per generare un segnale analogico e il comparatore per confrontare il segnale generato con un segnale di riferimento, così facendo si può avere un meccanismo di Trigger molto preciso e veloce.\\
+\label{DAC}
+Il DAC e il Comparatore, anche se 2 periferiche diverse, sono trattate insieme in quanto sono usate come trigger: il DAC per generare un segnale analogico e il comparatore per confrontare il segnale generato con un segnale di riferimento, così facendo si può avere un meccanismo di Trigger molto preciso e veloce.\\
 
 \subsection{Funzionamento DAC}
 
@@ -16,9 +17,9 @@ Per questo motivo, la struttura del DAC è stata progettata in modo da minimizza
     \label{fig:DAC}
 \end{figure}
 
-La struttura è molto semplice: se il bit è 1, il circuito si chiude e il voltaggio in uscita è $V_{ref}$, se il bit è 0, il circuito si apre e il voltaggio in uscita è 0. La configurazione delle Resistenze permette di dimezzare il voltaggio in uscita ad ogni iterazione dello schema. E, dato che alla fine c'è un amplificatore operazionale, il voltaggio in uscita sarà la somma dei voltaggi generati da ogni bit, moltiplicato per un fattore dell'Amplificatore.\\
+La struttura è molto semplice: ogni switch corrisponde ad un transistor a cui viene dato il valore del bit in voltaggio: se il bit è 1, il circuito si chiude e il voltaggio in uscita è $V_{ref}$, se il bit è 0, il circuito si apre e il voltaggio in uscita è 0. La configurazione delle Resistenze permette di dimezzare il voltaggio in uscita ad ogni iterazione dello schema. E, dato che alla fine c'è un amplificatore operazionale, il voltaggio in uscita sarà la somma dei voltaggi generati da ogni bit, moltiplicato per un fattore dell'Amplificatore.\\
 
-Così facendo, usando solo 2 tipi di resistenza, un amplificatore operazionale e dei transistore come interruttori, siamo in grado di creare un segnale analogico.\\
+Così facendo, usando solo 2 tipi di resistenza, un amplificatore operazionale e dei transistor come interruttori, siamo in grado di creare un segnale analogico.\\
 \pagebreak
 \subsection{Funzionamento Comparatore}
 Il Comparatore non è altro che un amplificatore operazionale con un'uscita che non può essere Negativa. Questo significa che, se il voltaggio in ingresso è maggiore di un voltaggio di riferimento, l'uscita sarà alta, altrimenti sarà bassa.\\
@@ -29,10 +30,11 @@ Il Comparatore non è altro che un amplificatore operazionale con un'uscita che 
     \caption{Grafico Voltaggio Amplificatore con Isteresi}
     \label{fig:Comparatore}
 \end{wrapfigure}
-Un comportamento particolare del comparatore è l'isteresi. L'isteresi è un fenomeno che si verifica quando il segnale in ingresso è vicino al voltaggio di riferimento. In questo caso, l'uscita del comparatore non è stabile e può oscillare tra alto e basso. Per evitare questo fenomeno, si può aggiungere un isteresi al comparatore.\\
-L'isteresi si aggiunge mettendo un partitore di tensione in retroazione positiva. Così facendo ci sarà una differenza di voltaggio tra quando il comparatore sale e quando scende.\\
 
-Questo comportamento ci permetterà di usare il comparatore non solo come singolo trigger ma come doppio trigger.\\
+Se si considera un comparatore ideale, questo soffrirà di instabilità nel caso in cui il voltaggio in input sia vicino al voltaggio di riferimento. Per evitare questo problema, si aggiunge l'isteresi al comparatore.\\
+L'isteresi si ottiene mettendo il comparatore in retroazione positiva, così facendo, il voltaggio di salita si discosta dal voltaggio di discesa, evitando quindi il problema di instabilità del comparatore.\\
+
+Questa particolare caratteristica del comparatore ci permetterà di usare il comparatore non solo come singolo trigger ma come doppio trigger.\\
 
 \subsection{Programmazione}
 La programmazione del DAC e del Comparatore si fa quasi totalmente da STM32CubeMX. La configurazione consiste nel collegare il DAC al comparatore, selezionre il valore di isteresi del Comparatore. Una volta configurato, nel codice basta aggiungere la funzione che permette di attivare il DAC e il Comparatore.\\

@@ -6,8 +6,7 @@ Nel microcontrollore che abbiamo usato non c'è un singolo timer e ognuno ha car
 Per i nostri scopi, noi abbiamo interagito con il Timer 6 che è un timer PLL
 
 \subsection{Funzionamento}
-I clock PLL sono dei clock che sfruttano un clock di riferimento, nel nostro caso di quarzo, per generare un clock a frequenze più alte. Questo processo avviene attraverso un Voltage Control Oscillator il quale è in grado di generare onde quadre a frequenze molto alte e un
-Filtro passa Basso che fa da filtro per le armoniche generate dal VCO.\\
+I clock PLL (o phase locked loop) sono dei clock che sfruttano un clock di riferimento, nel nostro caso di quarzo, per generare un clock a frequenze più alte. Questo processo avviene attraverso un Voltage Control Oscillator il quale è in grado di generare onde quadre a frequenze molto alte e un Filtro passa Basso che fa da filtro per le armoniche generate dal VCO.\\
 
 \begin{figure}[h]
     \centering
@@ -27,7 +26,7 @@ Per configurare il Timer 6, abbiamo usato STM32CubeMX. Questo programma permette
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{microcontrollore/assets/clock_config.jpg}
-    \caption{Configurazione del Timer}
+    \caption{pagina di configurazione del clock all'interno di STM32CubeMX}
     \label{fig:Timer}
 \end{figure}
  

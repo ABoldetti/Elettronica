@@ -14,6 +14,7 @@ Questo tipo di trigger corrisponde alla versione più semplice ed intuitiva di t
 \begin{minted}[bgcolor=coding , linenos]{C}
 uint8_t flag_Trigger_EN = 0;
 uint8_t flag_Triggered = 0;
+
 void ESPE_DMA_Trigger(void){
     if(!flag_Triggered && flag_Trigger_EN){ // Se non è già stato triggerato
                                             //e è arrivato il segnale di attivazione
@@ -63,7 +64,6 @@ void ESPE_DMA_Trigger_Pretrigger(void){
                 flag_Pretriggered = 0;
                 index = vec_len - DMA1_Stream0 -> NDTR + data_len +1
                 index_stop = vec_len - (index)%vec_len; //Calcola l'indice di stop
-
             }
             return;
         }
@@ -107,10 +107,7 @@ if(!flag_Triggered && flag_Trigger_EN){
             flag_Triggered = 1;
             flag_Trigger_EN = 0;
             flag_Pretriggered = 0;
-
-            //index_stop = (DMA1_Stream0 ->NDTR + vec_len - data_len)%vec_len;
             index_stop = vec_len - (vec_len - DMA1_Stream0 -> NDTR + data_len +1)%vec_len;
-
         }
         return;
     }

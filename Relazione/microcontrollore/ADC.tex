@@ -5,7 +5,7 @@ L'ADC è una periferica che permette di convertire un segnale analogico in un se
 \subsection{Funzionamento}
 Per convertire valori analogici in digitale esistono diversi metodi, il microcontrollore usato usa il metodo di conversione ad approssimazioni successive.\\
 
-Seppur questo metodo non permette di avere i dati convertiti istantaneamente come può essere un Flash ADC, permette di avere una maggiore precisione e di avere un errore minore.\\
+Anche se questo metodo non permette di avere i dati convertiti istantaneamente come può essere un Flash ADC, permette di avere una maggiore precisione e di avere un errore minore ad un costo ridotto.\\
 
 \begin{wrapfigure}{l}{0.7\linewidth}
     % \centering
@@ -14,20 +14,20 @@ Seppur questo metodo non permette di avere i dati convertiti istantaneamente com
     \captionof{figure}{Schema di funzionamento dell'ADC}
 \end{wrapfigure}
 
-L'ADC ad approssimazioni successive per funzionare sfrutta un comparatore e un metodo di ricerca binaria. Attraverso una coversione Digitale-Analogica, il microcontrollore invia un segnale analogico al comparatore, il quale ritornerà un segnale positivo se il segnale inviato è maggiore di quello ricevuto, altrimenti ritornerà nullo.\\
+L'ADC ad approssimazioni successive per funzionare sfrutta un comparatore e un metodo di ricerca binaria. Attraverso una coversione Digitale-Analogica (il cui funzionamento è spiegato al capitolo {\hypersetup{linkcolor= black} \ref{DAC}}), il microcontrollore invia un segnale analogico al comparatore, il quale ritornerà un segnale positivo se il segnale inviato è maggiore di quello ricevuto, altrimenti ritornerà nullo.\\
 
 Così facendo, il microcontrollore può ricavare con precisione e con poche iterazioni del metodo la rappresentazione binaria migliore per il valore analogico.\\
 
 Altri aspetti positivi di questo metodo sono la presenza di un singolo compartore, il quale permette di diminuire notevolmente l'errore nella misura e la presenza di registri per la ricerca binaria, i quali rendono il processo più veloce di altri metodi.\\
 
 \subsection{Programmazione}
-Parte importante della programmazione con l'ADC è la calibrazione dell'apparato. Infatti, prima dell'utilizzo
+Parte importante della programmazione con l'ADC è la calibrazione dell'apparato. Questa calibrazione si fa direttamente dal codice modificando dei flag per la calibrazione e aspettando che essa sia completata.\\
 
 \noindent
 \begin{minted}[bgcolor = coding, linenos]{C}
     void ESPE_ADC_init(void){
 
-	// azzeriamo per evitare casini di configurazione
+	// azzeriamo per evitare problemi di configurazione
 	ADC3 -> SQR1 = 0;
 
 	// ogni numero è collegato ad un pin a sèstante
@@ -92,12 +92,12 @@ Per leggere i dati, invece, si può inserire nell'interrupt una funzione dedicat
 
     
     void ESPE_ADC_data(void){
-        if( counter_ADC < len_vec){
-            vec[counter_ADC] = ADC3->DR;
-            counter_ADC++;
+        if( counter_ADC < len_vec){ // Se il vettore non è pieno
+            vec[counter_ADC] = ADC3->DR; // Prende il valore dell'ADC
+            counter_ADC++; // Incrementa il contatore
         }else{
-            conversion_flag = 1;
-            ADC3-> CR &= ~ADC_CR_ADSTART;
+            conversion_flag = 1; //ininzio la conversione
+            ADC3-> CR &= ~ADC_CR_ADSTART; //Fermo l'ADC
         }
     }
 

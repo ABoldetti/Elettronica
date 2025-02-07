@@ -1,4 +1,4 @@
-\pagebreak
+
 
 \section{Misure}
 Una volta studiato il funzionamento del fotomoltiplicatore, possiamo passare a prendere delle misure.\\
@@ -23,7 +23,7 @@ Una volta collegato l'ADC e il comparatore all'uscita del Peak Hold, è stato po
 Come si può notare, l'istogramma dei picchi è molto simile alla figura che si ha sull'oscilloscopio e i voltaggi sono molto simili.\\
 Quello che ci aspettiamo è che i fotoni rilevati, siano tutti proporzionali alla misura del singolo fotone. Andando a calcolare i voltaggi che nell'istogramma corrispondevano ai picchi, siamo in grado di confrontare i valori ottenuti con i vari multipli del voltaggio di un singolo fotone.\\
 
-
+\pagebreak
 \begin{wrapfigure}{r}{0.6\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Photomultiplier/assets/Voltaggio_fotoni.pdf}
@@ -37,8 +37,9 @@ Per quanto riguarda il rumore di sottofondo, si è notato che questo varia propo
 Come si può vedere dal grafico \ref{fig:dark_count}, gli istogrammi di Dark Count sono molto diversi con una differenza di solo $2V$ e questo è ragionevole pensare abbia un'influenza anche con il LED acceso.\\
 
 Questa condizione motiva la presenza di più fotoni a tensioni più alte rispetto a quello che ci aspettavamo: ovvero di avere più misure di singolo fotone che altro.\\
-\begin{wrapfigure}{l}{0.5\linewidth}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{Photomultiplier/assets/Paragone_dark_count.pdf}
+    \includegraphics[width=0.6\linewidth]{Photomultiplier/assets/Paragone_dark_count.pdf}
+    \caption{istogramma dei dark count a 34V e 36V in paragone con l'istogramma dei fotoni a 36V}
     \label{fig:dark_count}
-\end{wrapfigure}
+\end{figure}

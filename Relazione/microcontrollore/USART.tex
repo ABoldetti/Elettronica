@@ -4,9 +4,9 @@ La prima periferica usata è stata la USART. Usart ci permette di comunicare con
 \\
 
 \subsection{Funzionamento}
-Seppur la periferica permetta il trasferimento sicrono dei dati, noi la useremo come USART, quindi una versione precedente.\\
+Seppur la periferica permetta il trasferimento sicrono dei dati, noi la useremo solo in maniera Asincrona, quindi come UART.\\
 
-Questa periferica per funzionare ha bisogno di un collegamento diretto con il dispositivo a cui comunicare, questo collegamento nel nostro cavo consiste in 3 cavi: TX, RX e GND.\\
+Questa periferica per funzionare ha bisogno di un collegamento diretto con il dispositivo a cui comunicare, questo collegamento nel nostro casoo consiste nel cavo USB che collega il microcontrollore al PC. All'interno si usano 3 cavi separati per la comunicazione:
 
 
 \noindent
@@ -26,14 +26,14 @@ Questa periferica per funzionare ha bisogno di un collegamento diretto con il di
     \captionof{figure}{Collegamento tra microcontrollore e PC}
 \end{minipage}
 
-I dati sono mandati sottoforma di impulsi elettrici. Dato che i due dispositivi sono collegati con un singolo cavo, i dati sono inviati in ordine e, l'unica cosa di cui i due dispositivi hanno bisogno è la velocità di trasmissione, che deve essere uguale tra i 2 per assicurare la giusta lettura.\\
+I dati sono mandati sottoforma di impulsi elettrici. Dato che i due dispositivi sono collegati con un singolo cavo, gli impulsi sono inviati in ordine e, l'unica cosa di cui i due dispositivi hanno bisogno è la velocità di trasmissione, che deve essere uguale tra i 2 per assicurare la giusta lettura.\\
 La velocità di trasmissione è misurata in baud, ovvero il numero di bit trasmessi in un secondo e per questo si chiama Baud Rate. Di base è a 9600 baud, ma a seconda delle necessità può essere alzata fino al limite strumentale.\\
 
-Per evitare problemi di lettura, il ricevitore overcampiona i dati per poi farne una media. Così facendo, il rumore dovuto a cavi troppo lunghi o a interferenze elettromagnetiche viene minimizzato.\\
+Per evitare problemi di lettura dovuti al rumore nei cavi, il ricevitore overcampiona i dati per poi farne una media. Così facendo, il rumore dovuto a cavi troppo lunghi o a interferenze elettromagnetiche viene minimizzato.\\
 
 
 \subsection{Programmazione}
-Usart, nel nostro caso, è stato usare nel seguente modo: Inizialmente abbiamo spedito un carattere specifico dal pc al microcontrollore, questo carattere l'abbiamo usato come trigger per far partire la lettura dei dati, finita la lettura dei dati abbiamo trasmesso tutti i dati al computer.\\
+Usart, nel nostro caso, è stato usato nel seguente modo: Inizialmente abbiamo spedito un carattere specifico dal pc al microcontrollore, questo carattere l'abbiamo usato come trigger per far partire la lettura dei dati, finita la lettura dei dati abbiamo trasmesso tutti i dati al computer sempre con USART.\\
 
 \noindent
 \begin{minted}[bgcolor = coding, linenos]{C}
@@ -49,13 +49,13 @@ void ESPE_USART_char_start(void){
 \end{minted}
 \label{code:USART_start}
 
-Nel codice {\hypersetup{linkcolor=black}\ref{code:USART_start}}, andiamo ad usare 2 registri di USART: ISR e RDR. Il primo, l'Interrupt Status Register, contiene flag per controllare lo status di USART, mentre il secondo, il Receive Data Register, contiene il dato ricevuto.\\
+Nel codice sovrastante, si modificano 2 registri di USART: ISR e RDR. Il primo, l'Interrupt Status Register, contiene flag per controllare lo status di USART, mentre il secondo, il Receive Data Register, contiene il dato ricevuto.\\
 
 \noindent
 \begin{minted}[bgcolor = coding, linenos]{C}
 #define len_vec 100
-uint_8 vec_dati[len_vec];
-uint_8 len = sizeof(uint_8)/sizeof(char)*len_vec;
+int vec_dati[len_vec];
+uint_8 len = sizeof(int)/sizeof(char)*len_vec;
 char *str = vec_dati;
 uint_8 indice = 0;
 
@@ -76,7 +76,7 @@ void ESPE_USART_send_data(void){
 \end{minted}
 \label{code:USART_send}
 
-In questo codice, invece andiamo a usare il registro TDR, il Transmission Data Register, per mandare i dati al PC, ma, dato che i dati sono messi in un vettore di uint8 e il TDR ha le dimensioni di un char, il numero di byte da inviare non corrisponde alla dimensione del vettore. Questa discrepanza è risolta dalla variabile *str che è una variabile puntatore di tipo char puntata all'inizio del vettore.\\
+In questo codice si controlla, invece, il registro TDR, il Transmission Data Register, per mandare i dati al PC, ma, dato che i valori misurati sono messi in un vettore di \textit{int} e il TDR ha le dimensioni di un \textit{char}, il numero di byte da inviare non corrisponde alla dimensione del vettore. Questa discrepanza è risolta dalla variabile *str che è una variabile puntatore di tipo char puntata all'inizio del vettore.\\
 
 
 Oltre a queste funzioni è necessario definire un'altra funzione ausiliaria con la quale si passa dalla lettura dei dati al loro invio.\\
@@ -84,10 +84,10 @@ Oltre a queste funzioni è necessario definire un'altra funzione ausiliaria con 
 \noindent
 \begin{minted}[bgcolor = coding, linenos]{C}
 void ESPE_USART_invert_mode(void){
-    if(USART3 -> CR1 & USART_CR1_RXNEIE){
-        USART3 -> CR1 &= ~USART_CR1_RXNEIE;
-        USART3 -> CR1 |= USART_CR1_TCIE;
-    }else if(USART3 -> CR1 & USART_CR1_TCIE){
+    if(USART3 -> CR1 & USART_CR1_RXNEIE){ // Se l'interrupt è in lettura
+        USART3 -> CR1 &= ~USART_CR1_RXNEIE; // Disabilita l'interrupt in lettura
+        USART3 -> CR1 |= USART_CR1_TCIE; // Abilita l'interrupt in trasmissione
+    }else if(USART3 -> CR1 & USART_CR1_TCIE){ //Analogo in scrittura
         USART3 -> CR1 |= USART_CR1_RXNEIE;
         USART3 -> CR1 &= ~USART_CR1_TCIE;
     }
