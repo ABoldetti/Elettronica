@@ -39,6 +39,7 @@ Questa particolare caratteristica del comparatore ci permetterà di usare il com
 \subsection{Programmazione}
 La programmazione del DAC e del Comparatore si fa quasi totalmente da STM32CubeMX. La configurazione consiste nel collegare il DAC al comparatore, selezionre il valore di isteresi del Comparatore. Una volta configurato, nel codice basta aggiungere la funzione che permette di attivare il DAC e il Comparatore.\\
 
+
 \begin{minted}[bgcolor=coding , linenos]{C}
     COMP2->CFGR |= COMP_CFGRx_EN; // Attiva il Comparatore
     DAC1 -> DHR12R1 = 1000;	// soglia di trigger
